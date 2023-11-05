@@ -14,21 +14,38 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Navigation Bar'),
         centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
-      body: const Center(
-        child: Text(
-          'This is a body',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 2.0,
-            color: Colors.black,
-            fontFamily: 'Lato',
+      body: Row(
+        children: [
+          Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(40.0),
+                color: Colors.blue,
+                alignment: Alignment.center,
+                child: const Text('1'),
+              ),
           ),
-        ),
+          Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(40.0),
+                color: Colors.red,
+                alignment: Alignment.center,
+                child: const Text('2'),
+              )
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(40.0),
+              color: Colors.yellow,
+              alignment: Alignment.center,
+              child: const Text('3'),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: handleButtonClick,
+        onPressed: () {},
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
         child: const Text('Tap Me'),
@@ -42,7 +59,6 @@ class Home extends StatelessWidget {
     }
   }
 }
-
 
 
 
