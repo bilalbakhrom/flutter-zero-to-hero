@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:qutoes/quote.dart';
-
+import 'package:qutoes/quote_card.dart';
 
 void main() {
   runApp(const MaterialApp(
     home: QuoteList(),
   ));
 }
-
 
 class QuoteList extends StatefulWidget {
   const QuoteList({super.key});
@@ -38,43 +37,13 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((quote) => QuoteCard(quote)).toList(),
-      ),
-    );
-  }
-}
-
-class QuoteCard extends StatelessWidget {
-  Quote quote;
-
-  QuoteCard(this.quote, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              quote.text,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              quote.author,
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-              ),
-            )
-          ],
-        ),
+        children: quotes
+            .map((quote) => QuoteCard(quote, () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
+            .toList(),
       ),
     );
   }
