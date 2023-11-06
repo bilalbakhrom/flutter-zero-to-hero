@@ -8,14 +8,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map<String, dynamic>? data = {};
+  Map<String, dynamic> data = {};
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    // Set background
-    String backgroundImage =
-        data?['isDaytime'] ? 'daytime.jpg' : 'nighttime.jpg';
+    data = data.isEmpty
+        ? ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>
+        : data;
+    bool isDaytime = data['isDaytime'];
+    String backgroundImage = isDaytime ? 'daytime.jpg' : 'nighttime.jpg';
 
     return Scaffold(
       body: Container(
@@ -30,20 +31,35 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/location');
+                    onPressed: () async {
+                      dynamic results =
+                          await Navigator.pushNamed(context, '/location');
+
+                      if (results != null) {
+                        setState(() {
+                          data = {
+                            'time': results['time'],
+                            'location': results['location'],
+                            'isDaytime': results['isDaytime'],
+                            'flat': results['flag'],
+                          };
+                        });
+                      }
                     },
-                    icon: const Icon(Icons.edit_location, color: Colors.black),
-                    label: const Text('Edit Location',
-                        style: TextStyle(color: Colors.black)),
+                    icon: Icon(Icons.edit_location,
+                        color: (isDaytime ? Colors.black : Colors.white)),
+                    label: Text('Edit Location',
+                        style: TextStyle(
+                            color: isDaytime ? Colors.black : Colors.white)),
                   ),
                   const SizedBox(height: 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        data?['location'],
-                        style: const TextStyle(
+                        data['location'],
+                        style: TextStyle(
+                          color: isDaytime ? Colors.black : Colors.white,
                           fontSize: 28,
                           letterSpacing: 2,
                         ),
@@ -52,8 +68,10 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    data?['time'],
-                    style: const TextStyle(fontSize: 66),
+                    data['time'],
+                    style: TextStyle(
+                        color: isDaytime ? Colors.black : Colors.white,
+                        fontSize: 66),
                   ),
                 ],
               ),

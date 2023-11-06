@@ -28,8 +28,17 @@ class WorldTime {
         var url = Uri.http(host, path);
         var response = await http.get(url);
         Map<String, dynamic> data = jsonDecode(response.body);
-        var now = TimeZoneInfo.fromJson(data).now;
-        isDaytime = now.hour > 6 && now.hour < 20;
+
+        // get properties from json
+        String datetime = data['datetime'];
+        String offset = data['utc_offset'].substring(1,3);
+
+        // create DateTime object
+        DateTime now = DateTime.parse(datetime);
+        now = now.add(Duration(hours: int.parse(offset)));
+
+        // set the time property
+        isDaytime = (now.hour > 6 && now.hour < 20);
         time = DateFormat.jm().format(now);
       } catch(e) {
         print('caught error: $e');
