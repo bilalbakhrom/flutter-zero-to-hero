@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_trips/models/trip.dart';
+import 'package:ninja_trips/screens/details.dart';
 import 'package:ninja_trips/shared/trip_view.dart';
 
 class TripList extends StatefulWidget {
@@ -29,10 +30,21 @@ class _TripListState extends State<TripList> {
     _addTrips();
   }
 
+  void _handleTap(Trip trip) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Details(trip: trip)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: tripList.map((e) => TripView(trip: e)).toList(),
+      children: tripList
+          .map((e) => TripView(
+              trip: e,
+              onTap: () {
+                _handleTap(e);
+              }))
+          .toList(),
     );
   }
 }
