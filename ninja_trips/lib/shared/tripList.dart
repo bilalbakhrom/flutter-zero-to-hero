@@ -12,6 +12,8 @@ class TripList extends StatefulWidget {
 
 class _TripListState extends State<TripList> {
   List<Trip> tripList = [];
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  Tween<Offset> _offset = Tween(begin: Offset(1, 0), end: Offset(0, 0));
 
   void _addTrips() {
     List<Trip> trips = [
@@ -34,6 +36,25 @@ class _TripListState extends State<TripList> {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Details(trip: trip)));
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return AnimatedList(
+  //     key: _listKey,
+  //     initialItemCount: tripList.length,
+  //     itemBuilder: (context, index, animation) {
+  //       return SlideTransition(
+  //         position: animation.drive(_offset),
+  //         child: TripView(
+  //             trip: tripList[index],
+  //             onTap: () {
+  //               _handleTap(tripList[index]);
+  //             }
+  //         ),
+  //       );
+  //     }
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
