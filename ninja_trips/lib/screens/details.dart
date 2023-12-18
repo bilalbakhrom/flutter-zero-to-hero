@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_trips/models/trip.dart';
+import 'package:ninja_trips/shared/heart.dart';
 
 class Details extends StatelessWidget {
   Trip trip;
@@ -17,9 +18,12 @@ class Details extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image(
-            image: AssetImage('images/${trip.img}'),
-            fit: BoxFit.fitWidth,
+          Hero(
+            tag: trip.title,
+            child: Image(
+              image: AssetImage('images/${trip.img}'),
+              fit: BoxFit.fitWidth,
+            ),
           ),
           const SizedBox(height: 30),
           Padding(
@@ -43,11 +47,7 @@ class Details extends StatelessWidget {
                       ],
                     ),
                     const Expanded(child: SizedBox()),
-                    const Icon(
-                      Icons.favorite,
-                      size: 32,
-                      color: Colors.grey,
-                    ),
+                    const Heart(),
                   ],
                 ),
                 const SizedBox(height: 40),

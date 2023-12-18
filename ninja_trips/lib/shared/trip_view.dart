@@ -22,10 +22,13 @@ class TripView extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image(
-                image: AssetImage('images/${trip.img}'),
-                width: 50,
-                height: 50,
+              child: Hero(
+                tag: trip.title,
+                child: Image(
+                  image: AssetImage('images/${trip.img}'),
+                  width: 50,
+                  height: 50,
+                ),
               ),
             ),
             const SizedBox(width: 10),
