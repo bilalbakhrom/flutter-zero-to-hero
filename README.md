@@ -2,6 +2,7 @@
 
 As I learned Flutter development, I created several projects to showcase my growing skills with this versatile framework:
 
+- [**Namer**](https://github.com/bilalBakhrom/flutter-zero-to-hero/tree/feat/namer_app/namer_app) - I built a user-friendly responsive app that works well on different platforms (such as macOS, iOS, Android, and Web) and has fun animations.
 - [**Ninja Trips**](https://github.com/bilalBakhrom/flutter-zero-to-hero/tree/master/world_time) - I focused on mastering Flutter animations in this project.
 - [**World Time**](https://github.com/bilalBakhrom/flutter-zero-to-hero/tree/master/world_time) - This app demonstrates my ability to use external data sources and APIs in Flutter, providing real-time information from different time zones.
 - [**Quotes**](https://github.com/bilalBakhrom/flutter-zero-to-hero/tree/master/qutoes) - In the Quotes project, I expanded my knowledge by using Row and Column widgets, creating local packages, and becoming proficient in using padding and margin effectively.
