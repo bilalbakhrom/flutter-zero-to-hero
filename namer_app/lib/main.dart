@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:namer_app/modules/home.dart';
+import 'package:namer_app/modules/home_page.dart';
 import 'package:namer_app/models/app_state.dart';
 
 void main() {
