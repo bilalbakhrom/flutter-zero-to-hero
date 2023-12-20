@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/widgets.dart';
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
   var favorites = <WordPair>[];
   var historyList = <WordPair>[];
   GlobalKey? historyListKey;
+  GlobalKey? favoritesKey;
 
   bool isCurrentFavorite() {
     return favorites.contains(current);
@@ -24,9 +26,28 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeFavorite(
+    WordPair element,
+    Widget Function(BuildContext context, Animation<double> animation) itemBuilder) {
+    if (favorites.contains(element)) {
+      var index = favorites.indexOf(element);
+      favorites.remove(element);
+
+      var animatedList = favoritesKey?.currentState as AnimatedListState?;
+      animatedList?.removeItem(
+        index,
+        (context, animation) => itemBuilder(context, animation),
+      );
+
+      notifyListeners();
+    }
+  }
+
   void remove(WordPair element) {
-    favorites.remove(element);
-    notifyListeners();
+    if (favorites.contains(element)) {
+      favorites.remove(element);
+      notifyListeners();
+    }
   }
 
   void toggleFavorite() {

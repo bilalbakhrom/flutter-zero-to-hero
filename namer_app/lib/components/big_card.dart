@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-class BigCard extends StatelessWidget {
+class BigCard extends StatefulWidget {
   const BigCard({
     super.key,
     required this.pair,
@@ -9,6 +9,11 @@ class BigCard extends StatelessWidget {
 
   final WordPair pair;
 
+  @override
+  State<BigCard> createState() => _BigCardState();
+}
+
+class _BigCardState extends State<BigCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -21,10 +26,14 @@ class BigCard extends StatelessWidget {
       color: theme.colorScheme.primary,
       child: Padding(
         padding: EdgeInsets.all(20),
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
+        child: AnimatedSize(
+          curve: Curves.easeIn,
+          duration: Duration(milliseconds: 200),
+          child: Text(
+            widget.pair.asLowerCase,
+            style: style,
+            semanticsLabel: "${widget.pair.first} ${widget.pair.second}",
+          ),
         ),
       ),
     );

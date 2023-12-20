@@ -17,8 +17,8 @@ class GeneratorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              flex: 3,
-              child: HistoryList(),
+            flex: 3,
+            child: HistoryList(),
           ),
           BigCard(pair: pair),
           SizedBox(height: 10),
@@ -29,8 +29,12 @@ class GeneratorPage extends StatelessWidget {
                 onPressed: () {
                   appState.toggleFavorite();
                 },
-                icon: appState.isCurrentFavorite() ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
-                label: appState.isCurrentFavorite() ? Text('Unlike') : Text('Like'),
+                icon: appState.isCurrentFavorite()
+                    ? Icon(Icons.favorite)
+                    : Icon(Icons.favorite_border),
+                label: appState.isCurrentFavorite()
+                    ? Text('Unlike')
+                    : Text('Like'),
               ),
               SizedBox(width: 10),
               ElevatedButton(
